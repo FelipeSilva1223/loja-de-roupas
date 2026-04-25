@@ -75,15 +75,20 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script>
         // Lógica para aplicar ou não entrega/frete no formulário
-        const a = document.getElementById('endereco')
+        const inputEndereco = document.getElementById('endereco')
         document.addEventListener("change", function (e) {
             if (e.target.id === "radio_entrega") {
                 document.getElementById("card_endereco").classList.remove("d-none")
-                a.required = true;
+                inputEndereco.required = true;
             };
             if (e.target.id === "radio_retirada") {
                 document.getElementById("card_endereco").classList.add("d-none")
-                a.required = false;
+                inputEndereco.required = false;
+                let span_total = document.getElementById('total_valor');
+                let span_frete = document.getElementById('frete_valor')
+                sessionStorage.setItem('frete', 0)
+                span_frete.innerText = `R$ 0,00`
+                span_total.innerText = `R$ ${(Number(produtos.valor)).toFixed(2).replace(".", ",")}`
             };
             if (e.target.id === "forma_de_pagamento") {
                 if (e.target.value === "Crédito") {
@@ -95,15 +100,15 @@
         });
 
         // Aplicação do frete ao valor total
-        a.addEventListener('blur', function (){
+        inputEndereco.addEventListener('blur', function (){
             if(this.value.trim() === "") return;
-            const produtos = JSON.parse(sessionStorage.getItem('itemAtual'))
+            //const produtos = JSON.parse(sessionStorage.getItem('itemAtual'))
             let span_total = document.getElementById('total_valor');
             let span_frete = document.getElementById('frete_valor')
             //calcularFrete()
             sessionStorage.setItem('frete', 10)
-            const frete = Number(sessionStorage.getItem('frete'))
-            span_frete.innerText = `R$ ${frete.toFixed(2).replace(".", ",")}`
+            let frete = Number(sessionStorage.getItem('frete'))
+            span_frete.innerText = `R$ ${(frete).toFixed(2).replace(".", ",")}`
             span_total.innerText = `R$ ${(Number(produtos.valor) + frete).toFixed(2).replace(".", ",")}`
         })
 
@@ -120,7 +125,7 @@
             let entrega = ''
             let endereco = ''
             let parcelas = ''
-            //let frete = JSON.parse(sessionStorage.getItem('frete'))
+            let frete = JSON.parse(sessionStorage.getItem('frete'))
             let pagamento = document.getElementById('forma_de_pagamento').value;
             if (radioEntrega){
                 entrega = "Entrega"
