@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar compra</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/scripts/carregar_header.js" defer></script>
+    <script src="/scripts/carrinho.js" defer></script>
+    <script src="/scripts/carregar_produto.js" defer></script>
+</head>
+<body class="min-vh-100 d-flex flex-column">
+    <header id="header">
+
+    </header>
+    <main class="container flex-grow-1">
+        <div>
+            <form class="needs-validation" id="formulario">
+                <div class="row m-3">
+                    <div class="card mt-3">
+                        <div class="card-body">
+                            <div class="form-check">
+                                <input type="radio" id="radio_entrega" name="radio" class="form-check-input" required>
+                                <label for="radio_entrega" class="form-check-label">Entrega</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" id="radio_retirada" name="radio" class="form-check-input">
+                                <label for="radio_retirada" class="form-check-label">Retirada</label>
+                            </div>
+                        </div>
+                        <div id="card_endereco" class="card-body d-none">
+                            <div class="input-group">
+                                <span class="input-group-text">Endereço</span>
+                                <input type="text" class="form-control" id="endereco" name="endereco">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mt-3">
+                        <div class="card-body">
+                            <h5>Forma de pagamento</h5>
+                            <div class="mt-3">
+                                <select name="forma_de_pagamento" id="forma_de_pagamento" class="form-select" style="max-width: 150px;" required>
+                                    <option value="Pix">Pix</option>
+                                    <option value="Débito">Débito</option>
+                                    <option value="Crédito">Crédito</option>
+                                    <option value="A combinar">A combinar</option>
+                                </select>
+                                <select name="qtd_parcelas" id="qtd_parcelas" class="form-select mt-2 d-none" style="max-width: 150px;" required>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mt-3" id="card_produtos">
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success my-3">Finalizar compra</button>
+                    </div>
+                </div>
+            </form>
+    </main>
+    <footer class="d-flex justify-content-center align-items-center gap-3 py-3" style="background-color: #0E2340; color: #FAF3EB;">
+        <div>
+            <p class="mb-0">Contatos</p>
+            <a href="#" class="bi bi-whatsapp me-2 icone-footer" style="color: green;"></a>
+            <a href="#" class="bi bi-instagram me-2 icone-footer" style="color: #E1306C;"></a>
+            <a href="#" class="bi bi-facebook me-2 icone-footer" style="color: blue;"></a>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script>
+        // Lógica para aplicar ou não entrega/frete no formulário
+        const a = document.getElementById('endereco')
+        document.addEventListener("change", function (e) {
+            if (e.target.id === "radio_entrega") {
+                document.getElementById("card_endereco").classList.remove("d-none")
+                a.required = true;
+            };
+            if (e.target.id === "radio_retirada") {
+                document.getElementById("card_endereco").classList.add("d-none")
+                a.required = false;
+            };
+            if (e.target.id === "forma_de_pagamento") {
+                if (e.target.value === "Crédito") {
+                    document.getElementById("qtd_parcelas").classList.remove("d-none")
+                } else {
+                    document.getElementById("qtd_parcelas").classList.add("d-none")
+                };
+            };
+        });
+
+        // Aplicação do frete ao valor total
+        a.addEventListener('blur', function (){
+            if(this.value.trim() === "") return;
+            const produtos = JSON.parse(sessionStorage.getItem('itemAtual'))
+            let span_total = document.getElementById('total_valor');
+            let span_frete = document.getElementById('frete_valor')
+            //calcularFrete()
+            sessionStorage.setItem('frete', 10)
+            const frete = Number(sessionStorage.getItem('frete'))
+            span_frete.innerText = `R$ ${frete.toFixed(2).replace(".", ",")}`
+            span_total.innerText = `R$ ${(Number(produtos.valor) + frete).toFixed(2).replace(".", ",")}`
+        })
+
+        // Envio do formulário
+        const formulario = document.getElementById('formulario')
+        formulario.addEventListener('submit', function (e){
+            e.preventDefault();
+            if (!formulario.checkValidity()){
+                formulario.classList.add("was-validated");
+                return;
+            }
+            let radioEntrega = document.getElementById('radio_entrega').checked;
+            let radioRetirada = document.getElementById('radio_retirada').checked;
+            let entrega = ''
+            let endereco = ''
+            let parcelas = ''
+            //let frete = JSON.parse(sessionStorage.getItem('frete'))
+            let pagamento = document.getElementById('forma_de_pagamento').value;
+            if (radioEntrega){
+                entrega = "Entrega"
+                endereco = document.getElementById('endereco').value;
+            };
+            if (radioRetirada){
+                entrega = "Retirada"
+            };
+            if (pagamento === 'Crédito'){
+                parcelas = document.getElementById('qtd_parcelas').value
+            };
+            let relatorio = {id:1, modoEntrega:entrega, endereco:endereco, formaPagamento:pagamento, parcelas:parcelas, total:(Number(produtos.valor) + Number(frete))}
+            sessionStorage.setItem('mensagem', JSON.stringify(relatorio))
+            //sessionStorage.setItem('carrinho', JSON.stringify([]));
+            //sessionStorage.setItem('itemAtual', JSON.stringify({}))
+            window.location.href = "preparacao.html"
+        });
+    </script>
+</body>
+</html>

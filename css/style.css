@@ -1,0 +1,57 @@
+/* ===== GLOBAL =====*/
+body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: #FAF3EB;
+    font-size: clamp(14px, 2vw, 20px);
+}
+.btn {
+    font-size: inherit;
+}
+
+.logo-marca {
+    font-style: italic;
+    color: #FAF3EB;
+    font-size: 20px;
+}
+
+.icone-header {
+    font-size: 1.2rem;
+    color: #FAF3EB;
+}
+
+.icone-footer {
+    font-size: 1.2rem;
+}
+
+.card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.card-link .card {
+    transition: 0.2s;
+}
+
+.card-link .card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.btn-custom-primary {
+    background-color: #1BBFBF;
+    color: #fff;
+}
+.btn-custom-primary:hover {
+    background-color: #1BBFBF;
+    color: #fff;
+    filter: brightness(0.80);
+}
+.btn-custom-warning {
+    background-color: #F7C05A;
+    color: #fff;
+}
+.btn-custom-warning:hover {
+    background-color: #F7C05A;
+    color: #fff;
+    filter: brightness(0.80);
+}
