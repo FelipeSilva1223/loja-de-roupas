@@ -19,7 +19,7 @@ if (sessionStorage.getItem("usuariologado") === "true" || localStorage.getItem("
     <li><a href="${base}paginas/login.html" class="dropdown-item">Log in/Sign in</a></li>`
 }
 
-const headerTag = document.getElementById('header')
+const headerTag = document.querySelector('header')
 headerTag.insertAdjacentHTML('afterbegin', `
         <nav class="navbar justify-content-between align-items-center px-3 py-2" style="background-color: #0E2340;">
             <div name="logo">
