@@ -6,12 +6,10 @@ if (sessionStorage.getItem("usuarioLogado") === "true" || localStorage.getItem("
     
     if(sessionStorage.getItem("hierarquia") === "admin"){
         opcoes = `
-        <li><a href="${base}paginas/admin/adicionar.html" class="dropdown-item">Painel de controle</a></li>
-        <li><a href="${base}paginas/login.html" class="dropdown-item">Log out</a></li>`
+        <li><a href="${base}paginas/admin/adicionar.html" class="dropdown-item">Painel de controle</a></li>`
     } else {
         opcoes = `
-        <li><a href="#" class="dropdown-item">Perfil</a></li>
-        <li><a href="${base}paginas/login.html" class="dropdown-item">Log out</a></li>`
+        <li><a href="${base}paginas/publico/perfil.html" class="dropdown-item">Perfil</a></li>`
     }
 
 } else {
