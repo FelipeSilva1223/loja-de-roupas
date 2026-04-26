@@ -2,7 +2,7 @@ const base = location.hostname.includes("github.io")
     ? "/loja-de-roupas/"
     : "/";
 let opcoes = ''
-if (sessionStorage.getItem("usuariologado") === "true" || localStorage.getItem("usuariologado") === "true"){
+if (sessionStorage.getItem("usuarioLogado") === "true" || localStorage.getItem("usuarioLogado") === "true"){
     
     if(sessionStorage.getItem("hierarquia") === "admin"){
         opcoes = `
