@@ -27,7 +27,7 @@ headerTag.insertAdjacentHTML('afterbegin', `
             </div>
             <div class="dropdown">
                 <button type="button" class="btn bi bi-person me-3 icone-header dropdown-toggle" data-bs-toggle="dropdown"></button>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu dropdown-menu-end">
                     ${opcoes}
                 </ul>
                 <a href="${base}paginas/publico/carrinho.html" class="bi bi-cart4 me-3 icone-header position-relative">
