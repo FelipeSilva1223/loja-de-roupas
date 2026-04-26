@@ -59,8 +59,8 @@
         const senhaAdmin = "123"
         const emailUsuario ="usuario@gmail.com"
         const senhaUsuario = "123"
-        sessionStorage.setItem("usuariologado", false)
-        localStorage.setItem("usuariologado", false)
+        sessionStorage.setItem("usuarioLogado", false)
+        localStorage.setItem("usuarioLogado", false)
         localStorage.setItem("hierarquia", "usuario")
         function logar() {
             let email = document.getElementById("email").value;
@@ -69,11 +69,11 @@
             
             if (email === emailAdmin && senha === senhaAdmin){
                 if (lembrar.checked){
-                    localStorage.setItem("usuariologado", true)
+                    localStorage.setItem("usuarioLogado", true)
                     localStorage.setItem("hierarquia", "admin")
                     window.location.href = "admin/adicionar.html"
                 } else {
-                    sessionStorage.setItem("usuariologado", true)
+                    sessionStorage.setItem("usuarioLogado", true)
                     sessionStorage.setItem("hierarquia", "admin")
                     window.location.href = "admin/adicionar.html"
                 }
@@ -81,11 +81,11 @@
                 if (lembrar.checked){
                     localStorage.setItem("usuarioLogado", true)
                     localStorage.setItem("hierarquia", "usuario")
-                    window.location.href = "../index.html"
+                    window.location.href = "/index.html"
                 } else {
-                    sessionStorage.setItem("usuariologado", true)
+                    sessionStorage.setItem("usuarioLogado", true)
                     sessionStorage.setItem("hierarquia", "usuario")
-                    window.location.href = "../index.html"
+                    window.location.href = "/index.html"
                 }
                 
             } else {

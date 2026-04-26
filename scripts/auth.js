@@ -4,7 +4,7 @@ function Logout() {
     window.location.href = "/paginas/login.html"
 }
 function VerificarLogin() {
-    if (sessionStorage.getItem("usuariologado") === "true" || localStorage.getItem("usuariologado") === "true"){
+    if (sessionStorage.getItem("usuarioLogado") === "true" || localStorage.getItem("usuarioLogado") === "true"){
         
     } else {
         window.location.href = "/paginas/login.html"
