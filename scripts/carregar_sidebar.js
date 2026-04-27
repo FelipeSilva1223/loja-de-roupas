@@ -24,7 +24,7 @@ sidebar.insertAdjacentHTML('afterbegin', `
                         <span class="bi bi-receipt-cutoff"></span>
                         <span class="descricao collapse collapse-horizontal">Historico de pedidos</span>
                     </a>
-                    <a href="#" class="nav-link mt-5" onclick="Logout()">
+                    <a href="" class="nav-link mt-5" onclick="Logout()">
                         <span class="bi bi-box-arrow-right"></span>
                         <span class="descricao collapse collapse-horizontal">Log out</span>
                     </a>

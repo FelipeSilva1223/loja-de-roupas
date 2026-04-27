@@ -36,7 +36,7 @@
                                     <label for="lembrardemim" class="form-label">Lembrar de mim</label>
                                 </div>
                                 <div class="d-flex justify-content-center">
-                                    <button type="button" class="btn btn-primary" onclick="logar()">Log in</button>
+                                    <button type="button" class="btn btn-primary" onclick="Logar()">Log in</button>
                                 </div>
                             </form>
                         </div>
@@ -62,7 +62,7 @@
         sessionStorage.setItem("usuarioLogado", false)
         localStorage.setItem("usuarioLogado", false)
         localStorage.setItem("hierarquia", "usuario")
-        function logar() {
+        function Logar() {
             let email = document.getElementById("email").value;
             let senha = document.getElementById("senha").value;
             let lembrar = document.getElementById("lembrardemim")

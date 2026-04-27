@@ -109,12 +109,13 @@
         });
 
         // Lógica
-        let carrinho = JSON.parse(sessionStorage.getItem('carrinho')) ?? [];
+        const storage = localStorage.getItem('usuarioLogado') === 'true' ? localStorage : sessionStorage
+        let carrinho = JSON.parse(storage.getItem('carrinho')) ?? []
         function addCarrinho(){
             carrinho.push({'nome': item.nome,
                         'valor': item.valor,
             });
-            sessionStorage.setItem('carrinho', JSON.stringify(carrinho));
+            storage.setItem('carrinho', JSON.stringify(carrinho));
             atualizar();
         };
 
