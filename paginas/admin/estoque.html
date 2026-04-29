@@ -18,38 +18,20 @@
     </header>
     <main>
         <div class="d-flex">
-            <div class="sidebar border">
-                
-            </div>
+            <div class="sidebar border"></div>
             <div class="flex-grow-1">
                 <div class="container">
                     <div class="row">
                          <div class="col-12">
                             <h1>Estoque de peças</h1>
                         </div>
-                        <div class="col-sm-4 order-sm-2">
-                            <div class="card mt-2">
-                                <img src="../../imagens/vestido.png" alt="vestido" style="max-width: 500px; max-height: 300px;">
-                                <div class="m-2">
-                                    <button type="button" class="btn btn-secondary btn-sm">Editar</button>
-                                    <button type="button" class="btn btn-danger btn-sm">Apagar</button>
-                                    <button type="button" class="btn btn-warning btn-sm">Liquidar</button>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Nome da roupa</h5>
-                                    <h5>Valor: 99,00</h5>
-                                    <p>Descrição muito foda feita apenas para ocupar mais de uma linha e ver como fica o resultado visual</p>
-                                </div>
-                            </div>
+                        <div class="col-sm-4 order-sm-2" id="card_detalhes">
+
                         </div>
                         <div class="col-sm-8 order-sm-1">
                             <div class="card rounded-0 mt-2">
                                 <div class="card-body">
-                                    <div class="list-group">
-                                        <button type="button" class="list-group-item list-group-item-action active">Roupa exemplo n° 1</button>
-                                        <button type="button" class="list-group-item list-group-item-action">Roupa exemplo n° 1</button>
-                                        <button type="button" class="list-group-item list-group-item-action">Roupa exemplo n° 1</button>
-                                    </div>
+                                    <div class="list-group" id="lista_estoque"></div>
                                 </div>
                             </div>
                         </div>
@@ -60,5 +42,43 @@
         </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script>
+        const estoque = JSON.parse(localStorage.getItem('roupas'))
+        const divLista = document.getElementById('lista_estoque')
+        const cardDetalhes = document.getElementById('card_detalhes')
+
+        estoque.forEach(roupa => {
+            const botao = document.createElement('button')
+            botao.id = roupa.id
+            botao.classList.add('list-group-item')
+            botao.classList.add('list-group-item-action')
+            botao.innerText = roupa.nome
+            botao.addEventListener('click', function(){
+                document.querySelectorAll('#lista_estoque button')
+                .forEach(btn => btn.classList.remove('active'))
+                botao.classList.add('active')
+                selecionarItem(roupa)
+            })
+            divLista.insertAdjacentElement('beforeend', botao)
+        })
+
+        function selecionarItem(item){
+            let html = `
+                            <div class="card mt-2">
+                                <img src="../../imagens/vestido.png" alt="vestido" style="max-width: 500px; max-height: 300px;">
+                                <div class="m-2">
+                                    <button type="button" class="btn btn-secondary btn-sm">Editar</button>
+                                    <button type="button" class="btn btn-danger btn-sm">Apagar</button>
+                                    <button type="button" class="btn btn-warning btn-sm">Liquidar</button>
+                                </div>
+                                <div class="card-body" id="card_detalhes">
+                                    <h5 class="card-title">${item.nome}</h5>
+                                    <h5>Valor: ${item.valor}</h5>
+                                    <p>${item.descricao}</p>
+                                </div>
+                            </div>`
+            cardDetalhes.innerHTML = html
+        }
+    </script>
 </body>
 </html>
