@@ -19,8 +19,8 @@
     <main>
         <div class="d-flex">
             <div class="sidebar border"></div>
-            <div class="flex-grow-1">
-                <div class="container">
+            <div class="flex-grow-1" style="min-width: 0;">
+                <div class="container card p-2 mt-2">
                     <div class="row">
                          <div class="col-12">
                             <h1>Estoque de peças</h1>
@@ -48,6 +48,14 @@
         const cardDetalhes = document.getElementById('card_detalhes')
 
         estoque.forEach(roupa => {
+            if (estoque && estoque.length > 0) {
+                selecionarItem(estoque[0])
+
+                const primeiroBotao = document.querySelector('#lista_estoque button')
+                if (primeiroBotao) {
+                    primeiroBotao.classList.add('active')
+                }
+            }
             const botao = document.createElement('button')
             botao.id = roupa.id
             botao.classList.add('list-group-item')
@@ -65,11 +73,11 @@
         function selecionarItem(item){
             let html = `
                             <div class="card mt-2">
-                                <img src="../../imagens/vestido.png" alt="vestido" style="max-width: 500px; max-height: 300px;">
+                                <img src="../../imagens/${item.nome}.png" alt="vestido" style="max-width: 500px; max-height: 300px;">
                                 <div class="m-2">
-                                    <button type="button" class="btn btn-secondary btn-sm">Editar</button>
-                                    <button type="button" class="btn btn-danger btn-sm">Apagar</button>
-                                    <button type="button" class="btn btn-warning btn-sm">Liquidar</button>
+                                    <button type="button" class="btn btn-secondary btn-sm mt-1">Editar</button>
+                                    <button type="button" class="btn btn-danger btn-sm mt-1">Apagar</button>
+                                    <button type="button" class="btn btn-warning btn-sm mt-1">Liquidar</button>
                                 </div>
                                 <div class="card-body" id="card_detalhes">
                                     <h5 class="card-title">${item.nome}</h5>

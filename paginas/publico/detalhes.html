@@ -35,13 +35,13 @@
                         <div id="album" class="carousel slide">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img src="../../imagens/vestido.png" alt="vestido_exeplo" style="height: 300px; object-fit: cover;" class="d-block w-100">
+                                    <img src="../../imagens/${item.nome}.png" alt="${item.nome}" style="height: 300px; object-fit: cover;" class="d-block w-100">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="../../imagens/camisa.png" alt="camisa_exemplo" style="height: 300px; object-fit: cover;" class="d-block w-100">
+                                    <img src="../../imagens/${item.nome}.png" alt="${item.nome}" style="height: 300px; object-fit: cover;" class="d-block w-100">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="../../imagens/qr code exemplo.png" alt="teste" style="height: 300px; object-fit: cover;" class="d-block w-100">
+                                    <img src="../../imagens/${item.nome}.png" alt="${item.nome}" style="height: 300px; object-fit: cover;" class="d-block w-100">
                                 </div>
                             </div>
                               <button class="carousel-control-prev" type="button" data-bs-target="#album" data-bs-slide="prev">
@@ -69,6 +69,7 @@
                         <input type="text" name="frete" class="form-control" placeholder="_____-___">
                         <button class="btn btn-secondary btn-sm" onclick="calcularFrete()">Calcular</button>
                     </div>
+                    <span id="span_frete" class="card px-2 mt-2 d-none"></span>
                     <div class="py-3">
                         <button class="btn btn-primary" onclick="selecionarItem()">Comprar</button>
                         <button class="bi-cart4 btn btn-warning" onclick="addCarrinho()" id="btn_add_carrinho"> Carrinho</button>
@@ -121,7 +122,10 @@
         }
 
         function calcularFrete(){
+            const span_frete = document.getElementById('span_frete')
             sessionStorage.setItem('frete', 11)
+            span_frete.innerText = "Frete: R$: 11,00"
+            span_frete.classList.remove('d-none')
         }
     </script>
 </body>
