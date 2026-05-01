@@ -19,7 +19,7 @@ const html = `  <div class="card-body">
                 <div class="card mb-3 p-3">
                     <div class="card-body">
                         <div class="d-flex justify-content-between mb-3">
-                            <span id="frete_span" class="card-text">Total:</span><span id="frete_valor" class="card-text fw-bold">R$ ${Number(produtos.valor).toFixed(2).replace(".", ",")}</span>
+                            <span class="card-text">Total:</span><span class="card-text fw-bold">R$ ${Number(produtos.valor).toFixed(2).replace(".", ",")}</span>
                         </div>
                         <div class="d-flex justify-content-between mb-3">
                             <span id="frete_span" class="card-text">Frete:</span><span id="frete_valor" class="card-text fw-bold">R$ ${Number(frete).toFixed(2).replace(".", ",")}</span>

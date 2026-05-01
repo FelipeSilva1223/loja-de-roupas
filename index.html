@@ -23,10 +23,10 @@
     <footer></footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script>
-        localStorage.setItem('roupas', JSON.stringify([{'id':'1', 'nome': 'Vestido Rosa', 'valor': '100', 'descricao': 'Um vestido rosa de exemplo', 'detalhes': 'Ilustrado com arte digital'},
-                                                        {'id':'2', 'nome': 'Blusinha Rosa', 'valor': '100', 'descricao': 'Uma blusinha rosa de exemplo', 'detalhes': 'Ilustrado com arte digital'},
-                                                        {'id':'3', 'nome': 'Camisa Branca', 'valor': '200', 'descricao': 'Uma camisa branca de exemplo', 'detalhes': 'Ilustração realista'},
-                                                        {'id':'4', 'nome': 'Saia Preta', 'valor': '150', 'descricao': 'Uma saia preta de exemplo', 'detalhes': 'Ilustração realista'}]))
+        localStorage.setItem('roupas', JSON.stringify([{'id': 1 ,'nome': 'Vestido Rosa', 'valor': '100', 'descricao': 'Um vestido rosa de exemplo', 'detalhes': 'Ilustrado com arte digital', 'liquidado': false, 'liquidacao': 15},
+                                                       {'id': 2, 'nome': 'Blusinha Rosa', 'valor': '100', 'descricao': 'Uma blusinha rosa de exemplo', 'detalhes': 'Ilustrado com arte digital', 'liquidado': false, 'liquidacao': 15},
+                                                       {'id': 3, 'nome': 'Camisa Branca', 'valor': '200', 'descricao': 'Uma camisa branca de exemplo', 'detalhes': 'Ilustração realista', 'liquidado': false, 'liquidacao': 15},
+                                                       {'id': 4, 'nome': 'Saia Preta', 'valor': '150', 'descricao': 'Uma saia preta de exemplo', 'detalhes': 'Ilustração realista', 'liquidado': false, 'liquidacao': 15}]))
         const catalogo = JSON.parse(localStorage.getItem("roupas"))
         const row = document.getElementById("row_principal")
         catalogo.forEach((item, i) => {
