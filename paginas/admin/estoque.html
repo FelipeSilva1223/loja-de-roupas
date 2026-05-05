@@ -43,7 +43,7 @@
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script>
-        let estoque = JSON.parse(localStorage.getItem('roupas'))
+        const estoque = JSON.parse(localStorage.getItem('roupas'))
         const divLista = document.getElementById('lista_estoque')
         const cardDetalhes = document.getElementById('card_detalhes')
 
@@ -88,12 +88,13 @@
             cardDetalhes.innerHTML = html
         }
         function apagarItem(id){
-            let novoEstoque = estoque.filter(peca => peca.id != id)
-            console.log(novoCarrinho) // Lista sem o item apagado
-            //localStorage.setItem('roupas', novoCarrinho) 
+            const novoEstoque = estoque.filter(peca => peca.id != id)
+            console.log(novoEstoque) // Lista sem o item apagado
+            localStorage.setItem('roupas', JSON.stringify(novoEstoque)) 
+            location.reload();
         }
         function liquidarItem(id){
-            let novoEstoque = estoque.map(peca => {
+            const novoEstoque = estoque.map(peca => {
                 if(peca.id === id){
                     return {
                         ...peca,
@@ -102,8 +103,9 @@
                 }
                 return peca
             })
-            //localStorage.setItem('roupas', novoCarrinho) 
-            //location.reload();
+            localStorage.setItem('roupas', JSON.stringify(novoEstoque))
+            console.log(novoEstoque)
+            location.reload();
         }
     </script>
 </body>
