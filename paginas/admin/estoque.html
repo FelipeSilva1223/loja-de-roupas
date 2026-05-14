@@ -46,7 +46,6 @@
         const estoque = JSON.parse(localStorage.getItem('roupas'))
         const divLista = document.getElementById('lista_estoque')
         const cardDetalhes = document.getElementById('card_detalhes')
-
         estoque.forEach(roupa => {
             const botao = document.createElement('button')
             botao.id = roupa.id
@@ -69,19 +68,19 @@
                 primeiroBotao.classList.add('active')
             }
         }
-
         function selecionarItem(item){
             let html = `
                             <div class="card mt-2">
                                 <img src="../../imagens/${item.nome}.png" alt="vestido" style="max-width: 500px; max-height: 300px;">
                                 <div class="m-2">
-                                    <button type="button" class="btn btn-secondary btn-sm mt-1">Editar</button>
                                     <button type="button" class="btn btn-danger btn-sm mt-1" onclick="apagarItem(${item.id})">Apagar</button>
                                     <button type="button" class="btn btn-warning btn-sm mt-1" onclick="liquidarItem(${item.id})">Liquidar</button>
                                 </div>
                                 <div class="card-body" id="card_detalhes">
                                     <h5 class="card-title">${item.nome}</h5>
                                     <h5>Valor: ${item.valor}</h5>
+                                    <h5>Em liquidação? ${item.liquidado ? 'Sim' : 'Não'}</h5>
+                                    <h5>Liquidação: ${item.valorLiquidado}</h5>
                                     <p>${item.descricao}</p>
                                 </div>
                             </div>`
