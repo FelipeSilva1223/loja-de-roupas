@@ -9,7 +9,7 @@ sidebar.insertAdjacentHTML('afterbegin', `
                         <span class="descricao collapse collapse-horizontal">Adicionar</span>
                     </a>
                     <a href="pedidos.html" class="nav-link">
-                        <span class="bi bi-handbag"></span>
+                        <span class="bi-handbag-fill"></span>
                         <span class="descricao collapse collapse-horizontal">Pedidos</span>
                     </a>
                     <a href="estoque.html" class="nav-link">
@@ -20,11 +20,15 @@ sidebar.insertAdjacentHTML('afterbegin', `
                         <span class="bi bi-truck"></span>
                         <span class="descricao collapse collapse-horizontal">Entregas a fazer</span>
                     </a>
+                    <a href="retiradas.html" class="nav-link">
+                        <span class="bi bi-handbag"></span>
+                        <span class="descricao collapse collapse-horizontal">Retiradas pendentes</span>
+                    </a>
                     <a href="historico.html" class="nav-link">
                         <span class="bi bi-receipt-cutoff"></span>
                         <span class="descricao collapse collapse-horizontal">Historico de pedidos</span>
                     </a>
-                    <a href="" class="nav-link mt-5" onclick="Logout()">
+                    <a href="#" class="nav-link mt-5" onclick="logout()">
                         <span class="bi bi-box-arrow-right"></span>
                         <span class="descricao collapse collapse-horizontal">Log out</span>
                     </a>

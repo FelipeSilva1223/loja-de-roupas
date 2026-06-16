@@ -6,7 +6,7 @@ footerTag.style.color = "#FAF3EB";
 footerTag.insertAdjacentHTML('afterbegin', `
         <div>
             <p class="mb-0">Contatos</p>
-            <a href="#" class="bi bi-whatsapp me-2 icone-footer" style="color: green;"></a>
-            <a href="#" class="bi bi-instagram me-2 icone-footer" style="color: #E1306C;"></a>
+            <a href="#" target="_blank" class="bi bi-whatsapp me-2 icone-footer" style="color: green;"></a>
+            <a href="#" target="_blank" class="bi bi-instagram me-2 icone-footer" style="color: #E1306C;"></a>
             <a href="#" target="_blank" class="bi bi-facebook me-2 icone-footer" style="color: blue;"></a>
         </div>`)

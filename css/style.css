@@ -1,14 +1,20 @@
 /* ===== GLOBAL =====*/
 body {
     font-family: 'DM Sans', sans-serif;
-    background-color: #FAF3EB;
     font-size: clamp(14px, 2vw, 20px);
+}
+p {
+    color: #0E2340;
+}
+.card-title {
+    color: #0E2340;
 }
 .btn {
     font-size: inherit;
 }
 
 .logo-marca {
+    font-family: 'Playfair Display', serif;
     font-style: italic;
     color: #FAF3EB;
     font-size: 20px;
@@ -38,20 +44,23 @@ body {
 }
 
 .btn-custom-primary {
-    background-color: #1BBFBF;
+    background-color: #0E2340;
     color: #fff;
 }
 .btn-custom-primary:hover {
-    background-color: #1BBFBF;
-    color: #fff;
-    filter: brightness(0.80);
+    background-color: #0E2340;
 }
 .btn-custom-warning {
-    background-color: #F7C05A;
+    background-color: #F4724A;
     color: #fff;
 }
 .btn-custom-warning:hover {
-    background-color: #F7C05A;
+    background-color: #F4724A;
+}
+.btn-custom-success {
+    background-color: #F4724A;
     color: #fff;
-    filter: brightness(0.80);
+}
+.btn-custom-success:hover {
+    background-color: #F4724A;
 }

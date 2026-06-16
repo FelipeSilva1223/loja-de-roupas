@@ -7,9 +7,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/style.css">
-    <script src="../../scripts/carregar_header.js" defer></script>
-    <script src="../../scripts/carregar_footer.js" defer></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/backend/config.js"></script>
+    <script src="/scripts/carregar_header.js" defer></script>
+    <script src="/scripts/carregar_footer.js" defer></script>
 </head>
 <body class="min-vh-100 d-flex flex-column">
     <header id="header">
@@ -21,77 +22,23 @@
             </div>
         </div>
         <div id="btn_ir_as_compras" class="card mt-3  d-none">
-            <a href="../../index.html" class="btn btn-primary">Ir as compras</a>
+            <a href="/index.html" class="btn btn-custom-primary">Ir as compras</a>
         </div>
         <div id="div_principal">
             
         </div>
         <div class="d-flex justify-content-center col-12 mt-3">
-            <button id="btn_esvaziar" class="btn btn-secondary col-4" onclick="esvaziar()">Esvaziar carrinho</button>
+            <button id="btn_esvaziar" class="btn btn-custom-success col-4" onclick="esvaziar()">Esvaziar carrinho</button>
         </div>
         <div class="d-flex justify-content-center col-12 mt-3">
             <span id="total_span" class="btn btn-outline-secondary col-6">Total: R$ <span id="total_carrinho"></span></span>
         </div>
         <div class="d-flex justify-content-center col-12 mt-1 mb-3">
-            <button class="btn btn-success col-6" id="btn_finalizar" onclick="finalizar()">Finalizar Compra</button>
+            <button class="btn btn-custom-primary col-6" id="btn_finalizar" onclick="finalizar()">Finalizar Compra</button>
         </div>
     </main>
     <footer></footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <script>
-        let carrinho = JSON.parse(sessionStorage.getItem("carrinho")) ?? JSON.parse(localStorage.getItem("carrinho")) ?? [];
-        let total
-
-        document.addEventListener("DOMContentLoaded", function () {
-
-            if (carrinho.length < 1){
-                document.getElementById("total_span").classList.add("d-none")
-                document.getElementById("btn_esvaziar").classList.add("d-none")
-                document.getElementById("btn_finalizar").classList.add("d-none")
-                document.getElementById("carrinho_vazio").classList.remove("d-none")
-                document.getElementById("btn_ir_as_compras").classList.remove("d-none")
-            } else {
-                total = 0;
-                const div = document.getElementById("div_principal")
-                carrinho.forEach((item, i) => {
-                    total += parseInt(item.valor)
-                    let produto_carrinho = `<div class="card mt-3">
-                        <div class="row g-0">
-                            <div class="col-4">
-                                <img src="../../imagens/${item.nome}.png" alt="vestido" style="max-height: 150px; object-fit: cover;" class="w-100">
-                            </div>
-                            <div class="col-8">
-                                <a href="detalhes.html" class="card-link">
-                                    <div class="card-body">
-                                        <p class="card-text text-truncate">${item.nome}</p>
-                                        <p class="card-text fw-bold">R$ ${item.valor}</p>
-                                    </div>
-                                </a>
-                                <div class="d-flex justify-content-end mx-3 gap-1">
-                                    <button class="btn btn-danger btn-sm bi bi-trash" onclick="removerItem(${i})"></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>`;
-                div.insertAdjacentHTML("beforeend", produto_carrinho);
-                document.getElementById("total_carrinho").innerText = total;
-                });
-            }
-        })
-        function removerItem(i){
-            carrinho.splice(i, 1);
-            sessionStorage.setItem("carrinho", JSON.stringify(carrinho));
-            location.reload();
-        };
-        function esvaziar(){
-            sessionStorage.setItem("carrinho", JSON.stringify([]));
-            location.reload();
-        }
-        
-        function finalizar(){
-            sessionStorage.setItem('itemAtual', JSON.stringify({'nome': 'carrinho', 'valor': total}))
-            window.location.href = 'finalizar-compra.html'
-        }
-    </script>
+    <script src="/scripts/publico/carrinho.js"></script>
 </body>
 </html>

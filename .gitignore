@@ -1,0 +1,4 @@
+node_modules/
+.env
+backend/imagens/produtos/
+backend/imagens/temp/

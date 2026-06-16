@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Carrinho</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
-    <script src="../scripts/carregar_header.js" defer></script>
-    <script src="../scripts/carregar_footer.js" defer></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/backend/config.js"></script>
+    <script src="/scripts/carregar_header.js" defer></script>
+    <script src="/scripts/carregar_footer.js" defer></script>
 </head>
 <body class="min-vh-100 d-flex flex-column">
-    <header id="header">
-
-    </header>
+    <header></header>
     <main class="flex-grow-1 d-flex flex-column">
         <div class="container pt-5">
             <div class="row justify-content-center">
@@ -22,7 +21,7 @@
                     <div class="card">
                         <div class="card-body px-5">
                             <h1 class="card-title fw-bold text-center mb-3">Login</h1>
-                            <form method="POST">
+                            <form id="form_login">
                                 <div class="mb-3">
                                     <label for="email" class="form-label ">Email</label>
                                     <input type="email" name="email" id="email" class="form-control">
@@ -37,7 +36,7 @@
                                     <label for="lembrardemim" class="form-label">Lembrar de mim</label>
                                 </div>
                                 <div class="d-flex justify-content-center">
-                                    <button type="button" class="btn btn-primary" onclick="Logar()">Log in</button>
+                                    <button type="submit" class="btn btn-primary" id="btn_logar">Log in</button>
                                 </div>
                             </form>
                         </div>
@@ -48,44 +47,6 @@
     </main>
     <footer></footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <script>
-        const emailAdmin = "admin@gmail.com"
-        const senhaAdmin = "123"
-        const emailUsuario ="usuario@gmail.com"
-        const senhaUsuario = "123"
-        sessionStorage.setItem("usuarioLogado", false)
-        localStorage.setItem("usuarioLogado", false)
-        localStorage.setItem("hierarquia", "usuario")
-        function Logar() {
-            let email = document.getElementById("email").value;
-            let senha = document.getElementById("senha").value;
-            let lembrar = document.getElementById("lembrardemim")
-            
-            if (email === emailAdmin && senha === senhaAdmin){
-                if (lembrar.checked){
-                    localStorage.setItem("usuarioLogado", true)
-                    localStorage.setItem("hierarquia", "admin")
-                    window.location.href = "admin/adicionar.html"
-                } else {
-                    sessionStorage.setItem("usuarioLogado", true)
-                    sessionStorage.setItem("hierarquia", "admin")
-                    window.location.href = "admin/adicionar.html"
-                }
-            } else if (email === emailUsuario && senha === senhaUsuario){
-                if (lembrar.checked){
-                    localStorage.setItem("usuarioLogado", true)
-                    localStorage.setItem("hierarquia", "usuario")
-                    window.location.href = "../index.html"
-                } else {
-                    sessionStorage.setItem("usuarioLogado", true)
-                    sessionStorage.setItem("hierarquia", "usuario")
-                    window.location.href = "../index.html"
-                }
-                
-            } else {
-                document.getElementById("dadoincorreto").classList.remove("d-none")
-            }
-        }
-    </script>
+    <script src="/scripts/login.js"></script>
 </body>
 </html>

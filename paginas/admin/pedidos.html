@@ -7,15 +7,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/style.css">
-    <script src="../../scripts/auth.js"></script>
-    <script src="../../scripts/carregar_header.js" defer></script>
-    <script src="../../scripts/carregar_sidebar.js" defer></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/backend/config.js"></script>
+    <script src="/scripts/auth.js"></script>
+    <script src="/scripts/carregar_header.js" defer></script>
+    <script src="/scripts/carregar_sidebar.js" defer></script>
 </head>
 <body class="min-vh-100 d-flex flex-column">
-    <header id="header">
-
-    </header>
+    <header></header>
     <main>
         <div class="d-flex">
             <div class="sidebar border">
@@ -33,11 +32,12 @@
                                             <th>ID</th>
                                             <th>Cliente</th>
                                             <th>Data</th>
-                                            <th style="width: 80px;">Status</th>
+                                            <th>Status</th>
                                             <th style="width: 80px;">#</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="table-group-divider" id="tabela_pedidos_body"></tbody>
+                                    <tbody class="table-group-divider" id="tabela_pedidos_body">
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -45,7 +45,6 @@
                 </div>
             </div>
         </div>
-
         <div class="modal fade" id="modal_detalhes" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -53,46 +52,17 @@
                         <h1 class="modal-title fs-5" id="modal_titulo">Cliente 1</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body" id="modal_body"></div>
-                    <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">
-                            <span class="bi bi-check-circle"> Pedido concluído</span>
-                        </button>
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                            <span class="bi bi-x-circle"> Pedido cancelado</span>
-                        </button>
+                    <div class="modal-body" id="modal_body">
+
+                    </div>
+
+                    <div class="modal-footer justify-content-between" id="modal_botoes">
                     </div>
                 </div>
             </div>
          </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <script>
-        // Atualmente so pega a ultima compra no sessionStorage, mas futaramente será alimentado pelo banco de dados
-        const msg = JSON.parse(sessionStorage.getItem('mensagem'))
-        const divModal = document.getElementById('modal_detalhes')
-        const tabelaPedidos = document.getElementById('tabela_pedidos_body')
-        tabelaPedidos.innerHTML = `
-                                    <tr>
-                                        <th>${msg.id}</th>
-                                        <td>Cliente exemplo</td>
-                                        <td>${msg.data}</td>
-                                        <td class="text-secondary fw-bold">Conclusão pendente</td>
-                                        <td style="width: 80px;">
-                                            <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#modal_detalhes" onclick="">Detalhes</button>
-                                        </td>
-                                    </tr>        `
-
-        const itensModal = msg.itens.map(item => item.nome).join(", ")
-        let modal_titulo = document.getElementById('modal_titulo')
-        let modal_body = document.getElementById('modal_body')
-        modal_titulo.innerHTML = "ID do pedido"
-        modal_body.innerHTML = `
-                        <p>Nome do cliente</p>
-                        <p>${msg.data}</p>
-                        <p>Itens: ${itensModal}</p>
-                        <p>Valor total: ${msg.total.toLocaleString("pt-BR", {style:"currency", currency: "BRL"})}</p>
-                        <p>Forma de pagamento: ${msg.formaPagamento}</p>`
-    </script>
+    <script src="/scripts/admin/pedidos.js"></script>
 </body>
 </html>

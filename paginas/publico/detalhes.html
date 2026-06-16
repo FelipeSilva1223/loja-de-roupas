@@ -7,126 +7,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/style.css">
-    <script src="../../scripts/carregar_header.js" defer></script>
-    <script src="../../scripts/carregar_footer.js" defer></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/backend/config.js"></script>
+    <script src="/scripts/carregar_header.js" defer></script>
+    <script src="/scripts/carregar_footer.js" defer></script>
 </head>
 <body class="min-vh-100 d-flex flex-column">
-    <header id="header"></header>
+    <header></header>
     <main class="container flex-grow-1">
           <div class="row" id="row_detalhes"></div>
     </main>
     <footer></footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <script>
-        // Carrega o produto
-        const params = new URLSearchParams(window.location.search);
-        const id = params.get("id")
-        const catalogo = JSON.parse(localStorage.getItem('roupas'))
-        const item = catalogo.find(n => n.nome === id)
-
-        const parcelado = item.valor / 3
-        const descricao = item.descricao
-        const detalhes = item.detalhes
-        
-        const row = document.getElementById("row_detalhes")
-        const produto = `<div class="col-12 col-md-6 pt-3">
-                    <div class="card">
-                        <div id="album" class="carousel slide">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img src="../../imagens/${item.nome}.png" alt="${item.nome}" style="height: 300px; object-fit: cover;" class="d-block w-100">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="../../imagens/${item.nome}.png" alt="${item.nome}" style="height: 300px; object-fit: cover;" class="d-block w-100">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="../../imagens/${item.nome}.png" alt="${item.nome}" style="height: 300px; object-fit: cover;" class="d-block w-100">
-                                </div>
-                            </div>
-                              <button class="carousel-control-prev" type="button" data-bs-target="#album" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#album" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 py-2">
-                    <div class="card mt-2">
-                        <div class="card-body">
-                            <p class="card-title" id="nome_produto">${item.nome}</p>
-                            <p class="card-title fw-bold">${Number(item.valor).toLocaleString("pt-BR", {style:"currency", currency: "BRL"})}</p>
-                            <p class="card-text">Em até 3x ${parcelado.toLocaleString("pt-BR", {style:"currency", currency: "BRL"})}</p>
-                            <p class="card-text">${descricao}</p>
-                        </div>
-                    </div>
-                    <div class="input-group mt-3">
-                        <span class="input-group-text">Calcular frete</span>
-                        <input type="text" name="frete" class="form-control" placeholder="_____-___">
-                        <button class="btn btn-secondary btn-sm" onclick="calcularFrete()">Calcular</button>
-                    </div>
-                    <span id="span_frete" class="card px-2 mt-2 d-none"></span>
-                    <div class="py-3">
-                        <button class="btn btn-primary" onclick="selecionarItem()">Comprar</button>
-                        <button class="bi-cart4 btn btn-warning" onclick="addCarrinho()" id="btn_add_carrinho"> Carrinho</button>
-                    </div>
-                </div>
-                <div class="col=12 col-md-6 py-2">
-                    <div class="card py-2 px-3">
-                        ${detalhes}
-                    </div>
-                </div>`
-        row.insertAdjacentHTML("beforeend", produto);
-
-        // Botão adicionar ao carrinho
-
-        // Animação
-        document.getElementById("btn_add_carrinho").addEventListener("click", function () {
-            const botao = this;
-            try {
-                botao.textContent = " Adicionado";
-                botao.classList.remove("btn-warning");
-                botao.classList.add("btn-outline-warning");
-
-                setTimeout(() => {
-                    botao.textContent = " Carrinho";
-                    botao.classList.remove("btn-outline-warning");
-                    botao.classList.add("btn-warning");
-                }, 2000);
-
-            } catch (erro) {
-                alert("Não foi possível adicionar.");
-            }
-
-        });
-
-        // Lógica // Quando for ter banco de dados, vai verificar se esta logado, se estiver logado o carrinho vai pro banco de dados, se não, pro sessionStorage
-        const storage = localStorage.getItem('usuarioLogado') === 'true' ? localStorage : sessionStorage
-        let carrinho = JSON.parse(storage.getItem('carrinho')) ?? []
-        function addCarrinho(){
-            carrinho.push({'nome': item.nome,
-                        'valor': item.valor,
-            });
-            storage.setItem('carrinho', JSON.stringify(carrinho));
-            atualizar();
-        };
-
-        // Botão comprar
-        function selecionarItem() {
-            sessionStorage.setItem('itemAtual', JSON.stringify({'nome': item.nome, 'valor': item.valor}))
-            window.location.href = 'finalizar-compra.html'
-        }
-
-        function calcularFrete(){
-            const span_frete = document.getElementById('span_frete')
-            sessionStorage.setItem('frete', 11)
-            span_frete.innerText = "Frete: R$: 11,00"
-            span_frete.classList.remove('d-none')
-        }
-    </script>
+    <script src="/scripts/publico/detalhes.js"></script>
 </body>
 </html>
